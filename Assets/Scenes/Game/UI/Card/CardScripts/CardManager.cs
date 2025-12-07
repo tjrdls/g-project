@@ -1,29 +1,21 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using System;
-using System.Reflection;
-/*todo
-useSelectedCards 메서드 구현
-- 대표 카드를 플레이어 캐릭터 제어기로 전달하여 카드에 맞는 스킬 사용, 맞춘 적 반환
-- 현재 선택된 카드 리스트와 적카드 리스트로 족보를 판정, 알맞은 효과를 적용하도록 적 클래스의 메서드 호출
-*/
+
 
 //카드 리소스 경로: Resources/Cards 폴더
 //HandEvaluator.cs에서 족보 평가
 //카드 리소스 이름 규칙: "suit_number" (예: "spade_1", "heart_13")
 public class CardManager : MonoBehaviour
 {
-    public GameObject enemy;// (임시) 추후 삭제 예정
     [Header("UI")]
     public GameObject CardPanel;
     private Image[] bottomCards; // 카드 UI 슬롯
     public Sprite backSprite;   // 카드 뒷면
-    public Image cardprefab; 
+    public Image cardprefab;
+    public Image enemyCardPrefab; // 더 작은 프리팹
     private Sprite[,] allCardSprites = new Sprite[4, 13];
 
     [Header("Gameplay")]
@@ -31,17 +23,31 @@ public class CardManager : MonoBehaviour
 
     private List<Card> deck = new List<Card>(); // 전체 카드52장이 들어있는 덱
     private Dictionary<Image, Card> slotToCard = new Dictionary<Image, Card>();
-    private HashSet<Image> selectedSlots = new HashSet<Image>(); 
+    private HashSet<Image> selectedSlots = new HashSet<Image>();
+    private List<Card> lastUsedCards = new List<Card>();
 
+    private PlayerMovementClass playerMovement; //플레이어 필드와 연결 *(추가)
+    private PlayerInputActions playerInputActions;
 
+    public static CardManager instance;
 
     void Start()
     {
+        instance = this;
         // 카드 스프라이트 로드
         var loaded = Resources.LoadAll<Sprite>("Cards");
+        //플레이어 연결
+        //playerMovement = FindObjectOfType<PlayerMovementClass>();
+        playerMovement = FindFirstObjectByType<PlayerMovementClass>();
+
+        try {             
+            playerInputActions = InputManager.Instance.inputActions;
+        } catch {
+            Debug.LogWarning("InputManager or PlayerInputActions not found. Defaulting to keyboard input.");
+        }
+
         BuildAllCardSprites(loaded);
         InitializeDeck();
-        ShuffleDeck();
         DrawCard();
     }
 
@@ -85,11 +91,42 @@ public class CardManager : MonoBehaviour
         if (Keyboard.current.digit0Key.wasPressedThisFrame) ToggleSelectSlot(9);
 
         // use selected cards with 'C'
-        if (Keyboard.current.cKey.wasPressedThisFrame) UseSelectedCards();
+        if (playerInputActions != null)
+        {
+            if (playerInputActions.Player.Skill.triggered) //플레이어가 스킬 사용 가능한 상태인지
+            {
+                if (playerMovement == null)
+                    playerMovement = FindAnyObjectByType<PlayerMovementClass>();
 
-        if (Keyboard.current.xKey.wasPressedThisFrame) DrawCard();
+                if (playerMovement != null && !playerMovement.SKillCheck())
+                {
+                    Debug.Log("Skill blocked: Player cannot use skill now.");
+                    return;  // 카드 사용 막음
+                }
+
+                UseSelectedCards();
+            }
+        } else {
+            if (Keyboard.current.cKey.wasPressedThisFrame)
+            {
+                if (playerMovement == null)
+                    playerMovement = FindAnyObjectByType<PlayerMovementClass>();
+                if (playerMovement != null && !playerMovement.SKillCheck())
+                {
+                    Debug.Log("Skill blocked: Player cannot use skill now.");
+                    return;  // 카드 사용 막음
+                }
+
+                UseSelectedCards();
+            }
+        }
+
+
+
+        if (Keyboard.current.rKey.wasPressedThisFrame) DrawCard();
     }
 
+  
     private void InitializeDeck()
     {
         deck.Clear();
@@ -153,7 +190,6 @@ public class CardManager : MonoBehaviour
         return list;
     }
 
-    // evaluater테스트용 임시
     private void UseSelectedCards()
     {
         var currentSelected = GetSelectedCards();
@@ -163,34 +199,37 @@ public class CardManager : MonoBehaviour
             return;
         }
 
-        if (enemy == null)
-        {
-            Debug.LogWarning("Enemy GameObject not assigned on CardManager.");
-            return;
-        }
+        //카드 선택되어 있을 시에 플레이어 스킬 사용
+        playerMovement.TrySkill();
 
+
+        ClearSelectionsAfterUse();
+    }
+
+    // 승자 결정 메서드 (다른 클래스에서 호출하면 모든 적들에 대해 승패 판정후 statManager에 카드 효과 적용 요청)
+    public void DetermineWinner(GameObject enemy)
+    {
+        Debug.Log($"Determining winner against enemy: {enemy.name}");
         // 적카드 수집
-        var enemyImgs = enemy.GetComponentsInChildren<Image>(true);
+        GameObject cardPanel = enemy.GetComponent<Enemy>()?.cardPanel;
         List<Card> enemyCards = new List<Card>();
-        foreach (var img in enemyImgs)
-        {
-            if (img == null || img.sprite == null) continue;
-            if (img.sprite == backSprite) continue;
-            // try mapping from slotToCard first
-            if (slotToCard.TryGetValue(img, out Card mapped))
+        // 카드 패널 아래에서 Image 컴포넌트들 가져오기
+        if (cardPanel != null) {
+            var enemyImgs = cardPanel.GetComponentsInChildren<Image>(true);
+            foreach (var img in enemyImgs)
             {
-                enemyCards.Add(mapped);
-            }
-            else
-            {
+                if (img == null || img.sprite == null) continue;
+                if (img.sprite == backSprite) continue;
                 if (Card.TryParseSpriteNameToCard(img.sprite.name, out Card parsed)) enemyCards.Add(parsed);
+                
             }
         }
+        Debug.Log($"Enemy {enemy.name} has {enemyCards.Count} cards.");
 
         // 1) 적카드 + 내카드
         var combined = new List<Card>();
         combined.AddRange(enemyCards);
-        combined.AddRange(currentSelected);
+        combined.AddRange(lastUsedCards);
 
         HandEvaluator.HandResult combinedRes = null;
         if (combined.Count >= 1 && combined.Count <= 5)
@@ -204,16 +243,15 @@ public class CardManager : MonoBehaviour
             Debug.Log($"Victory: combined cards form a complete hand ({combinedRes.Name}). Applying effect to {enemy.name}.");
             // Placeholder effect
             Debug.Log($"ApplyEffectToEnemy: {enemy.name} because of {combinedRes.Name}");
-            ClearSelectionsAfterUse();
+            applyEfect(enemy, combinedRes.Rank);
             return;
         }
 
         // 2)내카드 
-        var myRes = HandEvaluator.EvaluateHand(currentSelected);
+        var myRes = HandEvaluator.EvaluateHand(lastUsedCards);
         if (myRes == null || !myRes.UsedAllCards)
         {
             Debug.Log($"Defeat: selected cards do not form a complete hand. ({myRes?.Name ?? "None"})");
-            ClearSelectionsAfterUse();
             return;
         }
 
@@ -224,17 +262,25 @@ public class CardManager : MonoBehaviour
         {
             Debug.Log($"Victory: my {myRes.Name} beats enemy {enemyRes?.Name ?? "None"}. Applying effect to {enemy.name}.");
             Debug.Log($"ApplyEffectToEnemy: {enemy.name} because of {myRes.Name}");
+            applyEfect(enemy, myRes.Rank);
         }
         else
         {
             Debug.Log($"Defeat: my {myRes.Name} does not beat enemy {enemyRes?.Name ?? "None"}.");
         }
 
-        ClearSelectionsAfterUse();
+
     }
 
+    static void applyEfect(GameObject enemy, HandEvaluator.HandRank handRank)
+    {
+        enemy.GetComponent<StatsComponent>()?.applyEffect(handRank);
+    }
     private void ClearSelectionsAfterUse()
     {
+        // store last used cards
+        lastUsedCards = GetSelectedCards();
+
         // clear visuals and selected lists
         foreach (var slot in selectedSlots.ToList())
         {
@@ -248,51 +294,44 @@ public class CardManager : MonoBehaviour
         }
         selectedSlots.Clear();
     }
-    
 
-    private void DrawCard()
+
+    private void DrawCard()// bottomCards 슬롯에 카드 배치
     {
-        // recreate bottom slots from card prefab under CardPanel and populate up to maxCardNum
+        // maxCardNum만큼 덱에서 카드를 뽑아 카드 프리팹으로 만든 슬롯에 배치
         if (CardPanel == null || cardprefab == null)
         {
             Debug.LogWarning("CardPanel or cardprefab not assigned");
             return;
         }
 
-        // clear existing child slots
+        // 카드 패널 비우기
         for (int i = CardPanel.transform.childCount - 1; i >= 0; i--)
         {
             var child = CardPanel.transform.GetChild(i).gameObject;
             Destroy(child);
         }
 
-        int count = Mathf.Max(0, maxCardNum);
-        bottomCards = new Image[count];
-        for (int i = 0; i < count; i++)
+        bottomCards = new Image[maxCardNum];
+        for (int i = 0; i < maxCardNum; i++)
         {
             Image inst = Instantiate(cardprefab, CardPanel.transform);
             inst.name = $"CardSlot_{i}";
             bottomCards[i] = inst;
 
-            Card c = DrawNextCard();
+            //deck의 첫번째 요소를 뽑고, deck의 마지막으로 이동
+            Card c = deck[0];
+            deck.RemoveAt(0);
+            deck.Add(c);
+
             slotToCard[inst] = c;
             ApplyCardToImage(inst, c);
         }
+
+        ShuffleDeck();
     }
 
-    private Card DrawNextCard()
-    {
-        if (deck.Count == 0)
-        {
-            InitializeDeck();
-            ShuffleDeck();
-        }
 
-        if (deck.Count == 0) return null;
-        Card c = deck[0];
-        deck.RemoveAt(0);
-        return c;
-    }
 
     // Apply Card sprite (or back) to an UI Image. Centralized so visual adjustments stay in one place.
     public void ApplyCardToImage(Image img, Card card)
@@ -310,5 +349,14 @@ public class CardManager : MonoBehaviour
     private void ShuffleDeck()
     {
         deck = deck.OrderBy(_ => UnityEngine.Random.value).ToList();
+    }
+
+    public void enemyCardDraw(GameObject cardPanel, List<Card> cards) 
+    {
+        foreach (var card in cards)
+        {
+            Image inst = Instantiate(enemyCardPrefab, cardPanel.transform);
+            ApplyCardToImage(inst, card);
+        }
     }
 }

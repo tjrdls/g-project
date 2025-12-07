@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     {
         // moveInput.x 값으로 좌우 이동
         float h = moveInput.x;
-        rb.linearVelocity = new Vector2(h * moveSpeed, rb.linearVelocity.y);
+
 
         // 좌우 반전
         if (h != 0)
@@ -41,6 +41,11 @@ public class Player : MonoBehaviour
     public void TriggerWeaponAttack()
     {
         weapon?.Attack();
+    }
+
+    public void TriggerWeaponSkill()
+    {
+        weapon?.Skill();
     }
 
     // Input System 콜백

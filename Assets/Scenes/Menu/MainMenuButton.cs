@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using DG.Tweening;
 
-public class MainMenuButton : MonoBehaviour
+public class MainMenuUI : MonoBehaviour
 {
-    public GameObject optionsPanel;
+    [Header("References")]
+    public SettingsUI settingsUI;   // SettingsUI 프리팹 또는 오브젝트 참조
 
     public void StartGame()
     {
@@ -13,15 +13,30 @@ public class MainMenuButton : MonoBehaviour
 
     public void OpenSettings()
     {
-        Debug.Log("Open Setting");
-        optionsPanel.SetActive(true);
- 
+        if (settingsUI == null)
+        {
+            Debug.LogError("SettingsUI reference is missing in MainMenuUI!");
+            return;
+        }
+
+        Debug.Log("Open Settings");
+
+        // 설정창 활성화 + 설정 로드
+        settingsUI.Open();
     }
 
     public void CloseSettings()
     {
-        Debug.Log("Close Setting");
-        optionsPanel.SetActive(false);
+        if (settingsUI == null)
+        {
+            Debug.LogError("SettingsUI reference is missing in MainMenuUI!");
+            return;
+        }
+
+        Debug.Log("Close Settings");
+
+        // 설정창 비활성화
+        settingsUI.Close();
     }
 
     public void QuitGame()
@@ -29,5 +44,6 @@ public class MainMenuButton : MonoBehaviour
         Debug.Log("Game Quit");
         Application.Quit();
     }
-    
 }
+
+

@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 8bad83b4a35f4884c8ff214757823d7b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2719144122173481125
+    second: FoolKnightLogo-removebg-preview_0
+  - first:
+      213: -6152597516353103250
+    second: FoolKnightLogo-removebg-preview_1
+  - first:
+      213: 6692436755695821853
+    second: FoolKnightLogo-removebg-preview_2
+  - first:
+      213: 726158043808769303
+    second: FoolKnightLogo-removebg-preview_3
+  - first:
+      213: 7545744837516664056
+    second: FoolKnightLogo-removebg-preview_4
+  - first:
+      213: -3165569600187183780
+    second: FoolKnightLogo-removebg-preview_5
+  - first:
+      213: -6131217318533523419
+    second: FoolKnightLogo-removebg-preview_6
+  - first:
+      213: 5510679820250457827
+    second: FoolKnightLogo-removebg-preview_7
+  - first:
+      213: 3903330257136095112
+    second: FoolKnightLogo-removebg-preview_8
+  - first:
+      213: -8129288204200951123
+    second: FoolKnightLogo-removebg-preview_9
+  - first:
+      213: -1756511087604618610
+    second: FoolKnightLogo-removebg-preview_10
+  - first:
+      213: -1058060249550555537
+    second: FoolKnightLogo-removebg-preview_11
+  - first:
+      213: 7265824300124653846
+    second: FoolKnightLogo-removebg-preview_12
+  - first:
+      213: 1815375426330667910
+    second: FoolKnightLogo-removebg-preview_13
+  - first:
+      213: -490778275755574685
+    second: FoolKnightLogo-removebg-preview_14
+  - first:
+      213: -2365552520444662212
+    second: FoolKnightLogo-removebg-preview_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_0
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 98
+        width: 336
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5f12c8d3d8a34ad0800000000000000
+      internalID: -2719144122173481125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_1
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 370
+        width: 69
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6a92df18259d9aa0800000000000000
+      internalID: -6152597516353103250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_2
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 377
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d14640175cf40ec50800000000000000
+      internalID: 6692436755695821853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_3
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 393
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 715a30cb4e4d31a00800000000000000
+      internalID: 726158043808769303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_4
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 370
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fc1bed53fed7b860800000000000000
+      internalID: 7545744837516664056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_5
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 377
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5d41157833a114d0800000000000000
+      internalID: -3165569600187183780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_6
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 372
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5281618555a89eaa0800000000000000
+      internalID: -6131217318533523419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_7
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 323
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e621f4891ed97c40800000000000000
+      internalID: 5510679820250457827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_8
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 293
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88f81a9203a6b2630800000000000000
+      internalID: 3903330257136095112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_9
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 302
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da244d7f277fe2f80800000000000000
+      internalID: -8129288204200951123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_10
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 152
+        width: 102
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8aaa43e87e9f97e0800000000000000
+      internalID: -1756511087604618610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_11
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 290
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f66f3921fc30151f0800000000000000
+      internalID: -1058060249550555537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_12
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 267
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 619c45974b465d460800000000000000
+      internalID: 7265824300124653846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_13
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 97
+        width: 37
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68ba96cf452813910800000000000000
+      internalID: 1815375426330667910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_14
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 139
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36a3c1a22c76039f0800000000000000
+      internalID: -490778275755574685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoolKnightLogo-removebg-preview_15
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 19
+        width: 96
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3ead51148edb2fd0800000000000000
+      internalID: -2365552520444662212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      FoolKnightLogo-removebg-preview_0: -2719144122173481125
+      FoolKnightLogo-removebg-preview_1: -6152597516353103250
+      FoolKnightLogo-removebg-preview_10: -1756511087604618610
+      FoolKnightLogo-removebg-preview_11: -1058060249550555537
+      FoolKnightLogo-removebg-preview_12: 7265824300124653846
+      FoolKnightLogo-removebg-preview_13: 1815375426330667910
+      FoolKnightLogo-removebg-preview_14: -490778275755574685
+      FoolKnightLogo-removebg-preview_15: -2365552520444662212
+      FoolKnightLogo-removebg-preview_2: 6692436755695821853
+      FoolKnightLogo-removebg-preview_3: 726158043808769303
+      FoolKnightLogo-removebg-preview_4: 7545744837516664056
+      FoolKnightLogo-removebg-preview_5: -3165569600187183780
+      FoolKnightLogo-removebg-preview_6: -6131217318533523419
+      FoolKnightLogo-removebg-preview_7: 5510679820250457827
+      FoolKnightLogo-removebg-preview_8: 3903330257136095112
+      FoolKnightLogo-removebg-preview_9: -8129288204200951123
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -51,6 +51,7 @@ public class PlayerMovementClass : MonoBehaviour, ICombatEntity
     private bool isAttacking;
     private bool isEvading;
     private bool isHit = false;
+    private bool isSkill;
     private float evadeTimer = 0f;
     private float evadeDirection;
 
@@ -133,8 +134,8 @@ public class PlayerMovementClass : MonoBehaviour, ICombatEntity
         Vector2 velocity = rb.linearVelocity;
 
 
-        // 공격/회피 중이면 이동 무시
-        if (isAttacking || isEvading) return;
+        // 공격/회피/스킬 중이면 이동 무시
+        if (isAttacking || isEvading || isSkill) return;
 
         if (isKnockbackActive)
         {
@@ -152,7 +153,7 @@ public class PlayerMovementClass : MonoBehaviour, ICombatEntity
 
     private void HandleDirection()
     {
-        if (isAttacking || isEvading || isHit) return;
+        if (isAttacking || isEvading || isHit || isSkill) return;
 
         if (moveInput > 0)
         {
@@ -180,7 +181,7 @@ public class PlayerMovementClass : MonoBehaviour, ICombatEntity
 
     public void TryJump()
     {
-        if (!isGrounded || isAttacking || isEvading || isHit) return;
+        if (!isGrounded || isAttacking || isEvading || isHit || isSkill) return;
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -247,14 +248,11 @@ public class PlayerMovementClass : MonoBehaviour, ICombatEntity
     #region Attack
     private void TryAttack()
     {
-        if (!isGrounded || isAttacking || isEvading || isHit) return;
+        if (!isGrounded || isAttacking || isEvading || isHit || isSkill) return;
 
         isAttacking = true;
         rb.linearVelocity = Vector2.zero;
         moveInput = 0f;
-
-        // 공격 애니메이션 시작
-        animator.Play("Attack");
     }
 
     public void EndAttack()
@@ -262,6 +260,30 @@ public class PlayerMovementClass : MonoBehaviour, ICombatEntity
         isAttacking = false;
         moveInput = inputActions.Player.Move.ReadValue<float>();
     }
+    #endregion
+
+    #region Skill
+    public bool SKillCheck()
+    {
+        if (!isGrounded || isAttacking || isEvading || isHit || isSkill)
+            return false;
+        else
+            return true;
+    }
+    public void TrySkill()
+    {
+
+        isSkill = true;
+        rb.linearVelocity = Vector2.zero;
+        moveInput = 0f;
+    }
+
+    public void EndSkill()
+    {
+        isSkill = false;
+        moveInput = inputActions.Player.Move.ReadValue<float>();
+    }
+
     #endregion
 
 
@@ -283,7 +305,7 @@ public class PlayerMovementClass : MonoBehaviour, ICombatEntity
 
     private void TryEvade()
     {
-        if (isEvading || isAttacking || !isGrounded || isHit) return;
+        if (isEvading || isAttacking || !isGrounded || isHit || isSkill) return;
 
         isEvading = true;
 
@@ -335,6 +357,7 @@ public class PlayerMovementClass : MonoBehaviour, ICombatEntity
         animator.SetBool("IsFalling", isFalling);
         animator.SetBool("IsAttacking", isAttacking);
         animator.SetBool("IsEvading", isEvading);
+        animator.SetBool("IsSkill", isSkill);
     }
     #endregion
 

@@ -18,7 +18,27 @@ public class Card
     {
         this.suit = suit;
         this.number = number;
-    }   
+    }
+
+    public string ToSymbolString()
+    {
+        string symbol = suit switch
+        {
+            Suit.Spade => "spade",
+            Suit.Heart => "heart",
+            Suit.Diamond => "dia",
+            Suit.Club => "clover",
+            _ => "?"
+        };
+
+        return $"{symbol}{number}";
+    }
+
+    public override string ToString()
+    {
+        return $"{suit} {number}";
+    }
+
 
     // Parse a sprite filename like "spade_1" (case-insensitive) into a Card instance.
     public static bool TryParseSpriteNameToCard(string spriteName, out Card card)
